@@ -1,0 +1,314 @@
+/* ============================================================
+   Tauri Uninstaller — App layout (TraeWork light design)
+   ============================================================ */
+
+:root {
+  --app-radius-card: var(--radius-16);
+  --app-radius-panel: var(--radius-12);
+  --app-radius-control: var(--radius-8);
+  --app-sidebar-width: 216px;
+  --app-topbar-height: 64px;
+  --app-accent: var(--bg-brand, #4B3FE3);
+  --app-accent-hover: var(--bg-brand-hover, #6A6FFF);
+  --app-border: var(--border-neutral-l2, rgba(115, 115, 115, 0.18));
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-family-default);
+  font-size: var(--body-base-font-size, 14px);
+  line-height: var(--body-base-line-height, 20px);
+  color: var(--text-default);
+  background: var(--bg-base-secondary, #F5F5F5);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+input, button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+/* ---------- 图标 ---------- */
+.icon {
+  width: var(--icon-size-20, 20px);
+  height: var(--icon-size-20, 20px);
+  color: currentColor;
+  stroke: currentColor;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.icon-sm { width: var(--icon-size-16, 16px); height: var(--icon-size-16, 16px); }
+.icon-lg { width: var(--icon-size-24, 24px); height: var(--icon-size-24, 24px); }
+.icon-xl { width: 48px; height: 48px; }
+
+/* ============================================================
+   整体壳：侧边栏 + 顶栏 + 主区
+   ============================================================ */
+.app-shell {
+  display: flex;
+  height: 100vh;
+}
+
+/* ---------- 侧边栏 ---------- */
+.sidebar {
+  width: var(--app-sidebar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-base-secondary, #F5F5F5);
+  padding: var(--spacer-16, 16px) var(--spacer-12, 12px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-10, 10px);
+  padding: var(--spacer-8, 8px) var(--spacer-10, 10px);
+  margin-bottom: var(--spacer-24, 24px);
+}
+
+.brand-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-6, 6px);
+  background: linear-gradient(135deg, var(--app-accent), #8B5CF6);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-default);
+  white-space: nowrap;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacer-4, 4px);
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-10, 10px);
+  padding: var(--spacer-10, 10px) var(--spacer-12, 12px);
+  border-radius: var(--radius-8, 8px);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.nav-item:hover {
+  background: var(--bg-overlay-l1, rgba(115, 115, 115, 0.08));
+  color: var(--text-default);
+}
+
+.nav-item.active {
+  background: var(--bg-white, #FFFFFF);
+  color: var(--text-default);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item.active .icon {
+  color: var(--app-accent);
+}
+
+.sidebar-foot {
+  padding: var(--spacer-12, 12px) var(--spacer-12, 12px) 0;
+}
+
+.version {
+  font-size: var(--body-sm-font-size, 11px);
+  color: var(--text-tertiary, #737373);
+}
+
+/* ---------- 顶栏 + 主区 ---------- */
+.main-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacer-16, 16px) var(--spacer-24, 24px) var(--spacer-24, 24px) 0;
+}
+
+.topbar {
+  height: var(--app-topbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacer-16, 16px);
+  padding: 0 var(--spacer-24, 24px);
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-default);
+  white-space: nowrap;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-12, 12px);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-8, 8px);
+  width: 300px;
+  padding: 0 var(--spacer-12, 12px);
+  height: 36px;
+  background: var(--bg-white, #FFFFFF);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-8, 8px);
+  color: var(--icon-tertiary, #737373);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 3px var(--bg-brand-popup, rgba(170, 183, 255, 0.36));
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: var(--text-default);
+}
+
+.search-box input::placeholder {
+  color: var(--text-tertiary, #737373);
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacer-6, 6px);
+  height: 36px;
+  padding: 0 var(--spacer-16, 16px);
+  border-radius: var(--radius-8, 8px);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--app-accent);
+  color: var(--text-onbrand, #FFFFFF);
+}
+
+.btn-primary:hover {
+  background: var(--app-accent-hover);
+}
+
+.btn-ghost {
+  width: 36px;
+  padding: 0;
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-8, 8px);
+  background: var(--bg-white, #FFFFFF);
+  color: var(--icon-secondary, #404040);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-overlay-l1, rgba(115, 115, 115, 0.08));
+  color: var(--icon-default, #262626);
+}
+
+.btn-danger {
+  background: #E5484D;
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background: #D63C41;
+}
+
+/* ---------- 主区域 ---------- */
+.content {
+  flex: 1;
+  min-height: 0;
+  padding: 0 var(--spacer-24, 24px);
+  overflow-y: auto;
+}
+
+.view {
+  display: none;
+  height: 100%;
+}
+
+.view.active {
+  display: block;
+}
+
+.content-card {
+  height: 100%;
+  background: var(--bg-white, #FFFFFF);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-card);
+  padding: var(--spacer-24, 24px);
+  overflow-y: auto;
+}
+
+/* ---------- 占位 ---------- */
+.placeholder {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacer-8, 8px);
+  color: var(--text-tertiary, #737373);
+  text-align: center;
+}
+
+.placeholder .icon {
+  color: var(--border-neutral-l3, rgba(115, 115, 115, 0.36));
+  margin-bottom: var(--spacer-8, 8px);
+}
+
+.placeholder h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-default);
+}
+
+.placeholder p {
+  font-size: 13px;
+  color: var(--text-tertiary, #737373);
+  max-width: 420px;
+}

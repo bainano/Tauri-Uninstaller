@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Uninstall</title>
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/components.css" />
+  <link rel="stylesheet" href="/styles/app.css" />
+  <style>
+    body { overflow: hidden; }
+    .mini-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: var(--bg-white, #FFFFFF);
+      border: 1px solid var(--app-border);
+      border-radius: var(--radius-12, 12px);
+      overflow: hidden;
+      user-select: none;
+    }
+    .mini-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      -webkit-app-region: drag;
+    }
+    .mini-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary, #404040);
+    }
+    .mini-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .mini-body .icon { color: var(--border-neutral-l3); }
+    .mini-body p { font-size: 13px; color: var(--text-tertiary); }
+    .mini-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 16px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="mini-shell">
+    <div class="mini-head">
+      <span class="mini-title">快捷卸载</span>
+      <span class="mini-title" style="font-size:11px;color:var(--text-tertiary)">v0.1.0</span>
+    </div>
+    <div class="mini-body">
+      <svg class="icon icon-xl"><use href="/assets/icons/fuzzysearch.svg#icon" /></svg>
+      <p>M3 上线：拖入快捷方式即可快捷卸载</p>
+    </div>
+    <div class="mini-actions">
+      <button class="btn btn-ghost" style="flex:1" id="mini-cancel">关闭</button>
+    </div>
+  </div>
+  <script type="module">
+    document.getElementById("mini-cancel").addEventListener("click", async () => {
+      await window.__TAURI__?.window?.getCurrentWindow()?.close?.();
+    });
+  </script>
+</body>
+</html>

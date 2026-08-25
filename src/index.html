@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tauri Uninstaller</title>
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/components.css" />
+  <link rel="stylesheet" href="/styles/app.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- 侧边栏 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Tauri Uninstaller</span>
+      </div>
+      <nav class="nav" id="nav">
+        <button class="nav-item active" data-view="software">
+          <svg class="icon"><use href="/assets/icons/home.svg#icon" /></svg>
+          <span>软件管理</span>
+        </button>
+        <button class="nav-item" data-view="filesearch">
+          <svg class="icon"><use href="/assets/icons/Search.svg#icon" /></svg>
+          <span>文件搜索</span>
+        </button>
+        <button class="nav-item" data-view="leftovers">
+          <svg class="icon"><use href="/assets/icons/clean.svg#icon" /></svg>
+          <span>残留清理</span>
+        </button>
+        <button class="nav-item" data-view="settings">
+          <svg class="icon"><use href="/assets/icons/settings.svg#icon" /></svg>
+          <span>设置</span>
+        </button>
+      </nav>
+      <div class="sidebar-foot">
+        <span class="version">v0.1.0 · M0</span>
+      </div>
+    </aside>
+
+    <!-- 顶栏 + 主区 -->
+    <div class="main-col">
+      <header class="topbar">
+        <h1 class="page-title" id="page-title">软件管理</h1>
+        <div class="topbar-actions">
+          <div class="search-box" id="global-search-box">
+            <svg class="icon icon-sm"><use href="/assets/icons/searchtext.svg#icon" /></svg>
+            <input type="text" id="search-input" placeholder="搜索软件名称、发布者…" />
+          </div>
+          <button class="btn btn-ghost" id="btn-refresh" title="刷新列表">
+            <svg class="icon"><use href="/assets/icons/Refresh.svg#icon" /></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- 软件管理 -->
+        <section class="view active" id="view-software">
+          <div class="content-card">
+            <div class="placeholder">
+              <svg class="icon icon-xl"><use href="/assets/icons/Table.svg#icon" /></svg>
+              <h3>软件列表</h3>
+              <p>M1 数据层开发中：注册表卸载项、UWP 应用将在此展示</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 文件搜索 -->
+        <section class="view" id="view-filesearch">
+          <div class="content-card">
+            <div class="placeholder">
+              <svg class="icon icon-xl"><use href="/assets/icons/Search.svg#icon" /></svg>
+              <h3>Everything 文件搜索</h3>
+              <p>M3 集成 Everything：秒级全局文件搜索与文件级清理</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 残留清理 -->
+        <section class="view" id="view-leftovers">
+          <div class="content-card">
+            <div class="placeholder">
+              <svg class="icon icon-xl"><use href="/assets/icons/clean.svg#icon" /></svg>
+              <h3>残留清理</h3>
+              <p>卸载后的文件、注册表、快捷方式残留将在此集中处理</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 设置 -->
+        <section class="view" id="view-settings">
+          <div class="content-card">
+            <div class="placeholder">
+              <svg class="icon icon-xl"><use href="/assets/icons/settings.svg#icon" /></svg>
+              <h3>设置</h3>
+              <p>扫描来源、Everything 配置、回收站策略等将在后续版本开放</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/app.js"></script>
+</body>
+</html>
