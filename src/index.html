@@ -58,10 +58,36 @@
         <!-- 软件管理 -->
         <section class="view active" id="view-software">
           <div class="content-card">
-            <div class="placeholder">
-              <svg class="icon icon-xl"><use href="/assets/icons/Table.svg#icon" /></svg>
-              <h3>软件列表</h3>
-              <p>M1 数据层开发中：注册表卸载项、UWP 应用将在此展示</p>
+            <div class="list-toolbar">
+              <div class="filter-group">
+                <button class="chip active" data-filter="all">全部</button>
+                <button class="chip" data-filter="uninstallable">可卸载</button>
+                <button class="chip" data-filter="missing">卸载器缺失</button>
+                <button class="chip" data-filter="system">系统组件</button>
+                <button class="chip" data-filter="uwp">UWP</button>
+              </div>
+              <span class="list-count" id="app-count">加载中…</span>
+            </div>
+            <div class="app-table-wrap">
+              <table class="app-table">
+                <thead>
+                  <tr>
+                    <th class="col-check"></th>
+                    <th class="col-name sortable" data-sort="name">名称</th>
+                    <th class="col-publisher sortable" data-sort="publisher">发布者</th>
+                    <th class="col-version sortable" data-sort="version">版本</th>
+                    <th class="col-size sortable" data-sort="size_mb">大小</th>
+                    <th class="col-date sortable" data-sort="install_date">安装日期</th>
+                    <th class="col-source">状态</th>
+                  </tr>
+                </thead>
+                <tbody id="app-tbody">
+                  <tr><td colspan="7" class="app-empty">正在扫描注册表与 UWP 应用…</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="list-footer">
+              <span id="selected-info">点击行或复选框选择应用</span>
             </div>
           </div>
         </section>
@@ -101,6 +127,18 @@
       </main>
     </div>
   </div>
+
+  <!-- 详情面板（滑出） -->
+  <div class="detail-mask" id="detail-mask"></div>
+  <aside class="detail-panel" id="detail-panel">
+    <div class="detail-head">
+      <h2>应用详情</h2>
+      <button class="btn btn-ghost" id="detail-close" title="关闭">
+        <svg class="icon"><use href="/assets/icons/Close.svg#icon" /></svg>
+      </button>
+    </div>
+    <div class="detail-body" id="detail-body"></div>
+  </aside>
 
   <script type="module" src="/scripts/app.js"></script>
 </body>

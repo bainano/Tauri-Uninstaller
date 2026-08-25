@@ -312,3 +312,311 @@ button {
   color: var(--text-tertiary, #737373);
   max-width: 420px;
 }
+
+/* ============================================================
+   软件列表
+   ============================================================ */
+.list-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacer-12, 12px);
+  margin-bottom: var(--spacer-16, 16px);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-8, 8px);
+  flex-wrap: wrap;
+}
+
+.chip {
+  height: 28px;
+  padding: 0 var(--spacer-12, 12px);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-full, 999px);
+  font-size: 13px;
+  color: var(--text-secondary, #595959);
+  background: var(--bg-white, #FFFFFF);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--app-accent);
+  color: var(--app-accent);
+}
+
+.chip.active {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  color: #FFFFFF;
+}
+
+.list-count {
+  font-size: 13px;
+  color: var(--text-tertiary, #737373);
+  white-space: nowrap;
+}
+
+/* ---------- 表格 ---------- */
+.app-table-wrap {
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-12, 12px);
+  overflow: auto;
+  max-height: calc(100% - 96px);
+}
+
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.app-table thead {
+  position: sticky;
+  top: 0;
+  background: var(--bg-base-secondary, #F5F5F5);
+  z-index: 1;
+}
+
+.app-table th {
+  text-align: left;
+  padding: 10px var(--spacer-12, 12px);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #595959);
+  border-bottom: 1px solid var(--app-border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.app-table th.sortable {
+  cursor: pointer;
+}
+
+.app-table th.sortable:hover {
+  color: var(--app-accent);
+}
+
+.app-table th.sorted {
+  color: var(--app-accent);
+}
+
+.app-table th.sorted::after {
+  content: "↑";
+  margin-left: 4px;
+  font-size: 11px;
+}
+
+.app-table th.sorted.desc::after {
+  content: "↓";
+}
+
+.app-table td {
+  padding: 8px var(--spacer-12, 12px);
+  border-bottom: 1px solid var(--border-neutral-l1, rgba(115, 115, 115, 0.08));
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.app-table tbody tr {
+  transition: background 0.12s ease;
+}
+
+.app-table tbody tr:hover {
+  background: var(--bg-overlay-l1, rgba(115, 115, 115, 0.05));
+}
+
+.app-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.col-check { width: 36px; text-align: center; }
+.col-name { min-width: 260px; }
+.col-publisher { min-width: 140px; color: var(--text-secondary, #595959); }
+.col-version { min-width: 90px; color: var(--text-secondary, #595959); }
+.col-size { min-width: 80px; color: var(--text-secondary, #595959); }
+.col-date { min-width: 100px; color: var(--text-secondary, #595959); }
+.col-source { min-width: 84px; text-align: center; }
+
+.app-check {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--app-accent);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.app-ident {
+  display: flex;
+  align-items: center;
+  gap: var(--spacer-10, 10px);
+}
+
+.app-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-8, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.app-name-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-name {
+  font-weight: 600;
+  color: var(--text-default);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.app-sub {
+  font-size: 12px;
+  color: var(--text-tertiary, #737373);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.app-empty {
+  padding: var(--spacer-32, 32px) !important;
+  text-align: center;
+  color: var(--text-tertiary, #737373);
+  font-size: 13px;
+}
+
+/* ---------- 状态标签 ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--radius-6, 6px);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tag-ok {
+  background: rgba(16, 185, 129, 0.12);
+  color: #0E9F6E;
+}
+
+.tag-warn {
+  background: rgba(245, 158, 11, 0.14);
+  color: #B45309;
+}
+
+.tag-system {
+  background: rgba(115, 115, 115, 0.14);
+  color: #595959;
+}
+
+.tag-uwp {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563EB;
+}
+
+/* ---------- 底部状态 ---------- */
+.list-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: var(--spacer-12, 12px);
+  font-size: 13px;
+  color: var(--text-tertiary, #737373);
+}
+
+/* ============================================================
+   详情面板（滑出）
+   ============================================================ */
+.detail-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 50;
+}
+
+.detail-mask.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.detail-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 420px;
+  max-width: 90vw;
+  background: var(--bg-white, #FFFFFF);
+  border-left: 1px solid var(--app-border);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
+  transform: translateX(100%);
+  transition: transform 0.22s ease;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-panel.open {
+  transform: translateX(0);
+}
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacer-20, 20px) var(--spacer-24, 24px);
+  border-bottom: 1px solid var(--app-border);
+}
+
+.detail-head h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-default);
+}
+
+.detail-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacer-20, 20px) var(--spacer-24, 24px);
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--spacer-10, 10px) 0;
+  border-bottom: 1px solid var(--border-neutral-l1, rgba(115, 115, 115, 0.08));
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-k {
+  font-size: 12px;
+  color: var(--text-tertiary, #737373);
+}
+
+.detail-v {
+  font-size: 13px;
+  color: var(--text-default);
+  word-break: break-all;
+  line-height: 1.5;
+}

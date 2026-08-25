@@ -1,5 +1,5 @@
-// Tauri Uninstaller — 主入口（M0 壳：导航切换 + 顶栏交互）
-import { greet } from "./api.js";
+// Tauri Uninstaller — 主入口（导航切换 + 顶栏交互 + 软件列表视图）
+import { initSoftwareView, closeDetail } from "./software-view.js";
 
 const VIEW_TITLES = {
   software: "软件管理",
@@ -22,14 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const view = item.dataset.view;
       document.getElementById(`view-${view}`)?.classList.add("active");
       pageTitle.textContent = VIEW_TITLES[view] || view;
+      closeDetail();
     });
   });
 
-  // 刷新按钮（M0 占位）
-  document.getElementById("btn-refresh").addEventListener("click", () => {
-    console.log("refresh placeholder");
+  // 初始化软件管理视图（搜索框、刷新按钮共用顶栏元素）
+  initSoftwareView({
+    searchInput: document.getElementById("search-input"),
+    refreshBtn: document.getElementById("btn-refresh"),
   });
 
-  // 验证 Rust 桥接（仅开发调试用）
-  greet("Tauri").then((msg) => console.log(msg)).catch(() => {});
+  // 详情面板关闭
+  document.getElementById("detail-mask").addEventListener("click", closeDetail);
+  document.getElementById("detail-close").addEventListener("click", closeDetail);
 });

@@ -13,7 +13,7 @@ export async function call(cmd, args = {}) {
   }
 }
 
-// 占位：M0 阶段验证桥接可用
-export async function greet(name) {
-  return call("greet", { name });
+// 获取全部已安装应用（注册表 + UWP）
+export async function listApps() {
+  return call("list_apps");
 }
