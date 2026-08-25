@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { invoke } from '@tauri-apps/api/core';
 import type { InstalledApp } from '../types';
 import { formatSize } from '../utils/format';
 
@@ -85,24 +87,65 @@ function AppRow({ app }: { app: InstalledApp }) {
   );
 }
 
+// 图标缓存：避免重复调用后端提取
+const iconCache = new Map<string, string>();
+
 function AppIcon({ app }: { app: InstalledApp }) {
-  // 优先读取注册表指向的 exe 图标；失败时显示占位图标
-  return (
-    <span className="app-icon">
-      {app.icon_path && /\.exe/i.test(app.icon_path) ? (
-        <img
-          src={`asset://localhost/${encodeURIComponent(app.icon_path.replace(/\\/g, '/'))}`}
-          alt=""
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.display = 'none';
-          }}
-        />
-      ) : (
+  const [src, setSrc] = useState<string | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const path = app.icon_path;
+    if (!path) {
+      setFailed(true);
+      return;
+    }
+
+    const cached = iconCache.get(path);
+    if (cached) {
+      setSrc(cached);
+      return;
+    }
+
+    let cancelled = false;
+    invoke<string>('extract_app_icon', { path })
+      .then((dataUrl) => {
+        if (cancelled) return;
+        iconCache.set(path, dataUrl);
+        setSrc(dataUrl);
+      })
+      .catch(() => {
+        if (!cancelled) setFailed(true);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [app.icon_path]);
+
+  if (src) {
+    return (
+      <span className="app-icon">
+        <img src={src} alt="" />
+      </span>
+    );
+  }
+
+  if (failed) {
+    return (
+      <span className="app-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <path d="M14 2v6h6" />
         </svg>
-      )}
+      </span>
+    );
+  }
+
+  // 加载中：占位
+  return (
+    <span className="app-icon">
+      <span className="icon-loading" />
     </span>
   );
 }
