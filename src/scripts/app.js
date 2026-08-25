@@ -1,5 +1,6 @@
 // Tauri Uninstaller — 主入口（导航切换 + 顶栏交互 + 软件列表视图）
 import { initSoftwareView, closeDetail } from "./software-view.js";
+import { closeUninstall } from "./uninstall-view.js";
 
 const VIEW_TITLES = {
   software: "软件管理",
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById(`view-${view}`)?.classList.add("active");
       pageTitle.textContent = VIEW_TITLES[view] || view;
       closeDetail();
+      closeUninstall();
     });
   });
 

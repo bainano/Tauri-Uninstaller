@@ -1,5 +1,7 @@
 // 软件管理视图：列表渲染、搜索过滤、排序、多选、详情面板
 import { listApps } from "./api.js";
+import { openUninstall, appCanUninstall } from "./uninstall-view.js";
+import { fmtSize, fmtDate } from "./format.js";
 
 const state = {
   apps: [],
@@ -25,16 +27,6 @@ function hashHue(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
   return AVATAR_COLORS[h % AVATAR_COLORS.length];
-}
-
-export function fmtSize(mb) {
-  if (mb == null) return "—";
-  if (mb >= 1024) return `${(mb / 1024).toFixed(1)} GB`;
-  return `${mb} MB`;
-}
-
-export function fmtDate(d) {
-  return d || "—";
 }
 
 export async function loadApps() {
@@ -232,6 +224,23 @@ function openDetail(app) {
   body.innerHTML = rows
     .map(([k, v]) => `<div class="detail-row"><span class="detail-k">${k}</span><span class="detail-v">${escapeHtml(v)}</span></div>`)
     .join("");
+
+  // 操作按钮
+  const actions = document.createElement("div");
+  actions.className = "detail-actions";
+  if (appCanUninstall(app)) {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-danger";
+    btn.textContent = "完美卸载";
+    btn.addEventListener("click", () => openUninstall(app));
+    actions.appendChild(btn);
+  }
+  const forceBtn = document.createElement("button");
+  forceBtn.className = "btn btn-ghost";
+  forceBtn.textContent = "强制卸载";
+  forceBtn.addEventListener("click", () => openUninstall(app));
+  actions.appendChild(forceBtn);
+  body.appendChild(actions);
 
   panel.classList.add("open");
   mask.classList.add("show");
